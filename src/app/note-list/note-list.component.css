@@ -1,0 +1,7 @@
+.btn-new {
+    width:fit-content;
+    cursor: pointer;
+    position: fixed;
+    bottom: 20px;
+    right: 60px;
+}

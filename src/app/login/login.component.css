@@ -1,0 +1,28 @@
+.login-grid {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+.btn-purple {
+  color: white;
+  background-color: #6610f2;
+}
+.btn-purple:hover {
+  background-color: #500ac2;
+}
+
+::placeholder {
+  color: #bfbfbf;
+  opacity: 1; /* Firefox */
+}
+
+::-ms-input-placeholder { /* Edge 12-18 */
+  color: #bfbfbf;
+}
+
+.field-error {
+  border: 1px solid red;
+}

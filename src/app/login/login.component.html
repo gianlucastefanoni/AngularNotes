@@ -1,0 +1,33 @@
+<div class="container">
+    <h1>Login</h1>
+    <div>
+        <form #form="ngForm" (ngSubmit)="onEnter()">
+            <div class='login-grid mx-auto'>
+                <div class="row w-100">
+                    <div class="form-group col">
+                        <label for="username">Username</label>
+                        <input id="username" name="username" class="form-control" type='text' [(ngModel)]='username'
+                               required #usernameField="ngModel" [class.field-error]="form.submitted && usernameField.invalid" />
+                    </div>
+                </div>
+                <div class="row w-100">
+                    <div class="form-group col">
+                        <label for="password">Password</label>
+                        <input id="password" name="password" class="form-control" type="password" [(ngModel)]="password"
+                               placeholder="••••••••" required #passwordField="ngModel"
+                               [class.field-error]="form.submitted && passwordField.invalid" />
+                    </div>
+                </div>
+                <div class="row w-100 px-2 gap-2">
+                    <button type="submit" class="btn btn-primary col-12">Login</button>
+                    <button (click)='onSignup()' class="btn btn-purple col">Signup</button>
+                </div>
+                <div class="row w-100">
+                    <div class="alert alert-danger p-2 mx-auto" style="font-size: 12px; width: 284px" role="alert" *ngIf="error">
+                        {{errorMsg}}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

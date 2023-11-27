@@ -1,0 +1,22 @@
+
+<nav class="navbar navbar-expand navbar-light bg-light pl-16">
+    <a class="navbar-brand">
+        <img [src]="logoPath" [width]="logoWidth" />
+    </a>
+    <ul class="nav nav-pills gap-1 align-middle">
+        <li>
+            <a class="nav-link"
+               routerLinkActive="active"
+               routerLink="/home">Home</a>
+        </li>
+        <li>
+            <a class="nav-link"
+               routerLinkActive="active"
+               routerLink="/login" *ngIf="isLogged()">Login</a>
+            <button (click)="disconnect()" *ngIf="!isLogged()" class="my-auto btn btn-outline-primary">Disconnect</button>
+        </li>
+    </ul>
+</nav>
+<div class="container">
+    <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,14 @@
+<div class="container">
+    <div *ngFor="let note of notes" class="w-50 mx-auto">
+        <a [routerLink]="['/notes', note.id]" class="text-decoration-none">
+            <div class="bg-white border border-primary rounded p-4 mb-2">
+                <h4 class="text-primary">{{note.title}}</h4>
+                <p class="text-dark">{{note.content}}</p>
+                <p class="text-secondary post-author">{{note.author}}</p>
+            </div>
+        </a>
+    </div>
+    <div class="btn-new">
+        <img [src]="newPath" width="70" (click)="createNewNote()" />
+    </div>
+</div>
