@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { Note, defaultNote } from "../data/Note";
+import { Note } from "../data/Note";
 import { Router, RouterLink } from "@angular/router";
 import { UserInterface } from "../data/UserInterface";
 import { DataService } from "../data/data.service";
@@ -15,7 +15,7 @@ import { DataService } from "../data/data.service";
 export class NoteListComponent implements OnInit {
     @Input() user!: UserInterface;
     newPath = "../assets/Group 1.svg";
-    notes: Note[] = [defaultNote];
+  notes: Note[] = [];
 
     constructor(private dataService: DataService, private router: Router) {}
 

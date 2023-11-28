@@ -1,8 +1,8 @@
 export interface Note {
-    id: string;
-    title: string;
-    author: string;
-    content: string;
+    id: string | null;
+    title: string | null;
+    author: string | null;
+    content: string | null;
 }
 
 export const defaultNote: Note = {

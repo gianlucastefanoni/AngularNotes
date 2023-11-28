@@ -83,5 +83,6 @@ a {
 }
 
 .main-bg {
-  background: linear-gradient(0deg, rgba(255,150,2,0.6672794117647058) 0%, rgba(255,255,255,1) 22%, rgba(255,255,255,1) 100%);
+  background: linear-gradient(to bottom right, #ffffff, rgb(255,142,56,0.1));
 }
+

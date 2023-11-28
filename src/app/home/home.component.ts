@@ -14,17 +14,14 @@ export class HomeComponent implements OnInit {
         confirmPassword: null,
         gender: null,
     };
-    welcomeMsg = "Welcome ";
+    welcomeMsg = "";
     logged = false;
 
     ngOnInit(): void {
         const tempUser = localStorage.getItem("logged");
         this.user = tempUser !== null ? JSON.parse(tempUser) : "";
         this.welcomeMsg =
-            "Welcome " +
-            (this.user !== null && this.user.username
-                ? this.user.username
-                : "");
+            this.user !== null && this.user.username ? this.user.username : "";
         this.logged = tempUser !== null ? true : false;
     }
 }
