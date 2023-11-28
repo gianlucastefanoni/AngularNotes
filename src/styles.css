@@ -26,3 +26,62 @@ a {
   font-weight: 300;
   text-align: end;
 }
+
+.text-orange {
+  color: #ff8e38;
+}
+
+.border-orange {
+  border-color: #ff8e38 !important;
+}
+
+.btn-orange {
+  background-color: #ff8e38;
+  color: white;
+}
+.btn-orange:hover {
+  background-color: #d67227;
+  color: white;
+}
+
+.btn-purple {
+  color: white;
+  background-color: #6610f2;
+}
+
+.btn-purple:hover {
+  background-color: #500ac2;
+  color: white;
+}
+
+.btn-outline-purple {
+  border-color: #6610f2;
+  color: #6610f2;
+}
+
+.btn-outline-purple:hover {
+  background-color: #6610f2;
+  color: white;
+}
+
+.nav-pills .nav-link {
+  color: #6610f2;
+}
+
+.nav-pills .nav-link:hover {
+  color: #500ac2;
+}
+
+.nav-pills .nav-link.active {
+  color: white;
+  background-color: #6610f2;
+}
+
+.nav-pills .nav-link.active:hover {
+  color: white;
+  background-color: #500ac2;
+}
+
+.main-bg {
+  background: linear-gradient(0deg, rgba(255,150,2,0.6672794117647058) 0%, rgba(255,255,255,1) 22%, rgba(255,255,255,1) 100%);
+}

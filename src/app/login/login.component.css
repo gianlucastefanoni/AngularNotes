@@ -6,13 +6,6 @@
   flex-wrap: wrap;
   gap: 1.25rem;
 }
-.btn-purple {
-  color: white;
-  background-color: #6610f2;
-}
-.btn-purple:hover {
-  background-color: #500ac2;
-}
 
 ::placeholder {
   color: #bfbfbf;

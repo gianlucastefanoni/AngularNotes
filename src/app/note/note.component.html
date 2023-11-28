@@ -2,8 +2,8 @@
     <h1>Edit Note</h1>
     <form #form="ngForm" (ngSubmit)="onEnter()">
         <div class="w-50 h-100 mx-auto">
-            <div class="bg-white border border-primary rounded p-4 mb-2">
-                <input id="title" name="title" class="form-control text-primary fs-3 border-0 mb-2" type="text"
+            <div class="bg-white border border-orange rounded p-4 mb-2">
+                <input id="title" name="title" class="form-control text-orange fs-3 border-0 mb-2" type="text"
                        [(ngModel)]="updatedNote.title" [disabled]="modifiable" />
                 <textarea rows="8" id="content" name="content" class="form-control text-dark border-0 mb-2"
                           [(ngModel)]="updatedNote.content" [disabled]="modifiable"></textarea>
