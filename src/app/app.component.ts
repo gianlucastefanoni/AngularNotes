@@ -20,4 +20,7 @@ export class AppComponent {
         localStorage.setItem("logged", "");
         this.router.navigateByUrl("/login");
     }
+    redirectToLogin() {
+        this.router.navigateByUrl("/login");
+    }
 }

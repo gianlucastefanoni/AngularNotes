@@ -1,6 +1,6 @@
-<div class="d-flex gap-2 fs-1 fw-bold">
-    <p>Welcome</p>
-    <div class="text-orange">{{welcomeMsg}}</div>
+<div class="d-flex gap-2">
+    <h1>Welcome</h1>
+    <h1 class="text-orange">{{welcomeMsg}}</h1>
 </div>
 <div *ngIf="logged">
     <hw-note-list [user]="user"></hw-note-list>
