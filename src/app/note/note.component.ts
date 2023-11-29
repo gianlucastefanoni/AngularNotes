@@ -2,14 +2,22 @@ import { Component, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { Note, defaultNote } from "../data/Note";
 import { ActivatedRoute, Router } from "@angular/router";
-import { FormsModule } from "@angular/forms";
+import {
+    HtmlEditorService,
+    ImageService,
+    LinkService,
+    RichTextEditorModule,
+    ToolbarService,
+} from "@syncfusion/ej2-angular-richtexteditor";
+import { FormsModule, NgForm } from "@angular/forms";
 
 @Component({
     selector: "pm-note",
     standalone: true,
-    imports: [CommonModule, FormsModule],
+    imports: [CommonModule, FormsModule, RichTextEditorModule],
     templateUrl: "./note.component.html",
     styleUrl: "./note.component.css",
+    providers: [ToolbarService, LinkService, ImageService, HtmlEditorService],
 })
 export class NoteComponent implements OnInit {
     notes: Note[] = [defaultNote, defaultNote];
@@ -28,7 +36,6 @@ export class NoteComponent implements OnInit {
         this.modifiable =
             JSON.parse(localStorage.getItem("logged") || "{username: '' }")
                 .username !== this.updatedNote.author;
-        console.log(this.modifiable);
     }
 
     updateNote() {
@@ -48,7 +55,8 @@ export class NoteComponent implements OnInit {
         this.router.navigateByUrl("/home");
     }
 
-    onEnter() {
+    onEnter(form: NgForm) {
+        this.updatedNote.content = form.value.content;
         this.updateNote();
         localStorage.setItem("notes", JSON.stringify(this.notes));
         this.router.navigateByUrl("/home");

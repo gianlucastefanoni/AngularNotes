@@ -1,6 +1,6 @@
 <div class="pb-5 min-vh-100 main-bg">
     <nav class="navbar navbar-expand navbar-light pl-16">
-        <a class="navbar-brand d-flex mr-2">
+        <a class="navbar-brand d-flex mr-2 text-decoration-none">
             <img [src]="logoPath" [width]="logoWidth" />
             <h2 class="my-auto">Notes</h2>
         </a>
@@ -14,7 +14,7 @@
                 <a class="nav-link"
                    routerLinkActive="active"
                    routerLink="/login" *ngIf="isLogged()">Login</a>
-                <button (click)="disconnect()" *ngIf="!isLogged()" class="my-auto mt-1 btn btn-outline-purple">Disconnect</button>
+                <button (click)="disconnect()" *ngIf="!isLogged()" class="h-100 my-auto btn btn-outline-purple">Disconnect</button>
             </li>
         </ul>
     </nav>

@@ -1,6 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
 /*@import "~font-awesome/css/font-awesome.min.css";*/
+@import '../node_modules/@syncfusion/ej2-base/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-icons/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-buttons/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-inputs/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-lists/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-navigations/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-richtexteditor/styles/material.css';
 
 div.card-header {
   font-size: large;
@@ -30,6 +39,9 @@ a {
 .text-orange {
   color: #ff8e38;
 }
+.text-orange:focus {
+  color: #ff8e38;
+}
 
 .border-orange {
   border-color: #ff8e38 !important;
@@ -55,6 +67,7 @@ a {
 }
 
 .btn-outline-purple {
+    background-color: #ffffff;
   border-color: #6610f2;
   color: #6610f2;
 }

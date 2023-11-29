@@ -1,12 +1,12 @@
 <div class="container pt-2">
     <h1>Edit Note</h1>
-    <form #form="ngForm" (ngSubmit)="onEnter()">
+    <form #form="ngForm" (ngSubmit)="onEnter(form)">
         <div class="w-50 h-100 mx-auto">
             <div class="bg-white border border-orange rounded p-4 mb-2">
                 <input id="title" name="title" class="form-control text-orange fs-3 border-0 mb-2" type="text"
                        [(ngModel)]="updatedNote.title" [disabled]="modifiable" />
-                <textarea rows="8" id="content" name="content" class="form-control text-dark border-0 mb-2"
-                          [(ngModel)]="updatedNote.content" [disabled]="modifiable"></textarea>
+                <ejs-richtexteditor id="content" name="content" [(ngModel)]="updatedNote.content" [readonly]="modifiable">
+                </ejs-richtexteditor>
                 <p class="text-secondary post-author">{{updatedNote.author}}</p>
             </div>
             <div class="d-flex gap-1">
@@ -15,5 +15,4 @@
             </div>
         </div>
     </form>
-
 </div>

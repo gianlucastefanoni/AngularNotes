@@ -3,7 +3,7 @@
         <a [routerLink]="['/notes', note.id]" class="text-decoration-none">
             <div class="bg-white border border-orange rounded note p-4 mb-2">
                 <h4 class="text-orange">{{note.title}}</h4>
-                <p class="text-dark">{{note.content}}</p>
+                <p class="text-dark" [innerHtml]="note.content"></p>
                 <p class="text-secondary post-author">{{note.author}}</p>
             </div>
         </a>

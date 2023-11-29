@@ -24,7 +24,6 @@ export class NoteListComponent implements OnInit {
         if (tempNotes !== null && tempNotes !== "null")
             this.notes = JSON.parse(tempNotes);
         else localStorage.setItem("notes", JSON.stringify(this.notes));
-        console.log(tempNotes);
     }
 
     createNewNote() {

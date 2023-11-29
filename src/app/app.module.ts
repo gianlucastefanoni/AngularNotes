@@ -7,6 +7,7 @@ import { RouterModule } from "@angular/router";
 import { HomeComponent } from "./home/home.component";
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./login/register.component";
+import { RichTextEditorModule } from "@syncfusion/ej2-angular-richtexteditor";
 import { NoteListComponent } from "./note-list/note-list.component";
 import { NoteComponent } from "./note/note.component";
 
@@ -16,6 +17,7 @@ import { NoteComponent } from "./note/note.component";
         BrowserModule,
         HttpClientModule,
         LoginComponent,
+        RichTextEditorModule,
         NoteListComponent,
         RouterModule.forRoot([
             { path: "home", component: HomeComponent },
