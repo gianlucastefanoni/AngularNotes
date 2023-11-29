@@ -1,8 +1,9 @@
 <div class="container">
-    <div class="form-group has-search w-50 mx-auto mb-3">
+    <div class="form-group has-search w-50 mx-auto mb-1">
         <span class="fa fa-search form-control-feedback"></span>
         <input id="searchField" name="searchField" [(ngModel)]="searchField" type="text"
         class="form-control" placeholder="Search" (input)="onSearchChange()">
+        <p class="text-secondary">Total notes: {{filteredNotes.length}}</p>
     </div>
     <div *ngFor="let note of filteredNotes" class="w-50 mx-auto">
         <a [routerLink]="['/notes', note.id]" class="text-decoration-none">

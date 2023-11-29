@@ -46,12 +46,13 @@ export class NoteListComponent implements OnInit {
     onSearchChange() {
         this.filteredNotes = this.notes.filter(
             (note) =>
-                note.title
+                (note.title
                     ?.toLowerCase()
                     .includes(this.searchField.toLowerCase()) ||
-                note.content
-                    ?.toLowerCase()
-                    .includes(this.searchField.toLowerCase())
+                    note.content
+                        ?.toLowerCase()
+                        .includes(this.searchField.toLowerCase())) &&
+                note.author === this.user.username
         );
     }
 }
