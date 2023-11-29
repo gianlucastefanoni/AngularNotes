@@ -11,6 +11,27 @@
 @import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
 @import '../node_modules/@syncfusion/ej2-richtexteditor/styles/material.css';
 
+/* width */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #c4c2c2;
+  border-radius: 10px;
+}
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a3a3a3;
+  }
+
 .has-search .form-control {
   padding-left: 2.375rem;
 }
