@@ -1,23 +1,28 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { Note } from "../data/Note";
 import { Router, RouterLink } from "@angular/router";
 import { UserInterface } from "../data/UserInterface";
 import { DataService } from "../data/data.service";
+import { SafeHtmlPipe } from "../pipe/safe-html.pipe";
 
 @Component({
     selector: "hw-note-list",
     standalone: true,
-    imports: [CommonModule, RouterLink],
+    imports: [CommonModule, RouterLink, SafeHtmlPipe],
     templateUrl: "./note-list.component.html",
     styleUrl: "./note-list.component.css",
+    encapsulation: ViewEncapsulation.None,
 })
 export class NoteListComponent implements OnInit {
     @Input() user!: UserInterface;
     newPath = "../assets/Group 1.svg";
-  notes: Note[] = [];
+    notes: Note[] = [];
 
-    constructor(private dataService: DataService, private router: Router) {}
+    constructor(
+        private dataService: DataService,
+        private router: Router
+    ) {}
 
     ngOnInit() {
         const tempNotes = localStorage.getItem("notes");

@@ -4,7 +4,6 @@ import { Note, defaultNote } from "../data/Note";
 import { ActivatedRoute, Router } from "@angular/router";
 import {
     HtmlEditorService,
-    ImageService,
     LinkService,
     RichTextEditorModule,
     ToolbarService,
@@ -17,14 +16,38 @@ import { FormsModule, NgForm } from "@angular/forms";
     imports: [CommonModule, FormsModule, RichTextEditorModule],
     templateUrl: "./note.component.html",
     styleUrl: "./note.component.css",
-    providers: [ToolbarService, LinkService, ImageService, HtmlEditorService],
+    providers: [ToolbarService, LinkService, HtmlEditorService],
 })
 export class NoteComponent implements OnInit {
     notes: Note[] = [defaultNote, defaultNote];
     updatedNote: Note = defaultNote;
     id = "0";
     modifiable = false;
-
+    public tools: object = {
+        type: "Expand",
+        items: [
+            "Bold",
+            "Italic",
+            "Underline",
+            "StrikeThrough",
+            "FontName",
+            "FontSize",
+            "FontColor",
+            "BackgroundColor",
+            "LowerCase",
+            "UpperCase",
+            "|",
+            "Formats",
+            "Alignments",
+            "OrderedList",
+            "UnorderedList",
+            "Outdent",
+            "Indent",
+            "|",
+            "Undo",
+            "Redo",
+        ],
+    };
     constructor(private route: ActivatedRoute, private router: Router) {}
 
     ngOnInit() {

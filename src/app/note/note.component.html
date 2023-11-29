@@ -3,9 +3,10 @@
     <form #form="ngForm" (ngSubmit)="onEnter(form)">
         <div class="w-50 h-100 mx-auto">
             <div class="bg-white border border-orange rounded p-4 mb-2">
-                <input id="title" name="title" class="form-control text-orange fs-3 border-0 mb-2" type="text"
+                <input id="title" name="title" class="form-control text-orange fs-4 border-0 mb-2" type="text"
                        [(ngModel)]="updatedNote.title" [disabled]="modifiable" />
-                <ejs-richtexteditor id="content" name="content" [(ngModel)]="updatedNote.content" [readonly]="modifiable">
+                <ejs-richtexteditor id="content" name="content" [(ngModel)]="updatedNote.content" [readonly]="modifiable"
+                                    [toolbarSettings]="tools">
                 </ejs-richtexteditor>
                 <p class="text-secondary post-author">{{updatedNote.author}}</p>
             </div>
