@@ -6,7 +6,7 @@
                 <input id="title" name="title" class="form-control text-orange fs-4 border-0 mb-2" type="text"
                        [(ngModel)]="updatedNote.title" [disabled]="modifiable" />
                 <ejs-richtexteditor id="content" name="content" [(ngModel)]="updatedNote.content" [readonly]="modifiable"
-                                    [toolbarSettings]="tools">
+                                    [toolbarSettings]="tools" [maxLength]="maxLength">
                 </ejs-richtexteditor>
                 <p class="text-secondary post-author">{{updatedNote.author}}</p>
             </div>

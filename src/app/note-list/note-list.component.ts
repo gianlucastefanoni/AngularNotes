@@ -5,11 +5,12 @@ import { Router, RouterLink } from "@angular/router";
 import { UserInterface } from "../data/UserInterface";
 import { DataService } from "../data/data.service";
 import { SafeHtmlPipe } from "../pipe/safe-html.pipe";
+import { FormsModule } from "@angular/forms";
 
 @Component({
     selector: "hw-note-list",
     standalone: true,
-    imports: [CommonModule, RouterLink, SafeHtmlPipe],
+    imports: [CommonModule, FormsModule, RouterLink, SafeHtmlPipe],
     templateUrl: "./note-list.component.html",
     styleUrl: "./note-list.component.css",
     encapsulation: ViewEncapsulation.None,
@@ -18,17 +19,16 @@ export class NoteListComponent implements OnInit {
     @Input() user!: UserInterface;
     newPath = "../assets/Group 1.svg";
     notes: Note[] = [];
-
-    constructor(
-        private dataService: DataService,
-        private router: Router
-    ) {}
+    filteredNotes: Note[] = [];
+    searchField = "";
+    constructor(private dataService: DataService, private router: Router) {}
 
     ngOnInit() {
         const tempNotes = localStorage.getItem("notes");
         if (tempNotes !== null && tempNotes !== "null")
             this.notes = JSON.parse(tempNotes);
         else localStorage.setItem("notes", JSON.stringify(this.notes));
+        this.onSearchChange();
     }
 
     createNewNote() {
@@ -41,5 +41,17 @@ export class NoteListComponent implements OnInit {
         });
         localStorage.setItem("notes", JSON.stringify(this.notes));
         this.router.navigateByUrl("/notes/" + id);
+    }
+
+    onSearchChange() {
+        this.filteredNotes = this.notes.filter(
+            (note) =>
+                note.title
+                    ?.toLowerCase()
+                    .includes(this.searchField.toLowerCase()) ||
+                note.content
+                    ?.toLowerCase()
+                    .includes(this.searchField.toLowerCase())
+        );
     }
 }

@@ -31,13 +31,12 @@ export class NoteComponent implements OnInit {
             "Underline",
             "StrikeThrough",
             "FontName",
-            "FontSize",
-            "FontColor",
-            "BackgroundColor",
+            "Formats",
+            //FontSize,
+            //"FontColor",
+            //"BackgroundColor",
             "LowerCase",
             "UpperCase",
-            "|",
-            "Formats",
             "Alignments",
             "OrderedList",
             "UnorderedList",
@@ -48,6 +47,7 @@ export class NoteComponent implements OnInit {
             "Redo",
         ],
     };
+    public maxLength = 400;
     constructor(private route: ActivatedRoute, private router: Router) {}
 
     ngOnInit() {
