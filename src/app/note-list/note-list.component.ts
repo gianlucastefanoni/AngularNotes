@@ -25,50 +25,79 @@ export class NoteListComponent implements OnInit {
     constructor(private dataService: DataService, private router: Router) {}
 
     ngOnInit() {
-        const tempNotes = localStorage.getItem("notes");
-        if (tempNotes !== null && tempNotes !== "null")
-            this.notes = JSON.parse(tempNotes);
-        else localStorage.setItem("notes", JSON.stringify(this.notes));
-        this.onSearchChange();
+        this.dataService.getNotesByUsername(this.user.username || "").subscribe(
+            (response) => {
+                this.notes = JSON.parse(response);
+                this.filteredNotes = this.notes;
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+        this.dataService
+            .getPinnedNotesByUsername(this.user.username || "")
+            .subscribe(
+                (response) => {
+                    this.pinnedNotes = JSON.parse(response);
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
     }
 
     createNewNote() {
         const id = this.dataService.generateId(8);
-        this.notes.push({
+        const newNote = {
             id: id,
             title: "Title",
-            author: this.user.username || "",
+            username: this.user.username || "",
             content: "Content",
             pinned: false,
-        });
-        localStorage.setItem("notes", JSON.stringify(this.notes));
-        this.router.navigateByUrl("/notes/" + id);
+        };
+        this.dataService.createNewNote(newNote).subscribe(
+            (response) => {
+                this.router.navigateByUrl("/notes/" + id);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
     }
 
     onSearchChange() {
         this.filteredNotes = this.notes.filter(
             (note) =>
-                (note.title
+                note.title
                     ?.toLowerCase()
                     .includes(this.searchField.toLowerCase()) ||
-                    note.content
-                        ?.toLowerCase()
-                        .includes(this.searchField.toLowerCase())) &&
-                note.author === this.user.username
-        );
-
-        this.pinnedNotes = this.filteredNotes.filter(
-            (note) => note.pinned === true
+                note.content
+                    ?.toLowerCase()
+                    .includes(this.searchField.toLowerCase())
         );
     }
 
-    addToPinned(id = "") {
-        //find in filtered, add to pinned, remove from filtered
-        return id;
+    addToPinned(note: Note) {
+        note.pinned = true;
+        this.dataService.updatePinnedNoteById(note).subscribe(
+            (response) => {
+                console.log(response);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
     }
 
-    removeFromPinned(id = "") {
-        //find in pinned, add to filtered, remove from pinned
-        return id;
+    removeFromPinned(note: Note) {
+        note.pinned = false;
+        this.dataService.updatePinnedNoteById(note).subscribe(
+            (response) => {
+                console.log(response);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
     }
 }

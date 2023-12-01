@@ -9,11 +9,11 @@
             </div>
             <div *ngFor="let note of filteredNotes">
                 <div class="bg-white border border-orange rounded note py-3 px-4 mb-2">
-                    <button class="btn" (click)="addToPinned(note.id || '')"><span class="fa fa-star-o"></span></button>
+                    <button class="btn" (click)="addToPinned(note)"><span class="fa fa-star-o"></span></button>
                     <a [routerLink]="['/notes', note.id]" class="text-decoration-none">
                         <h4 class="text-orange">{{note.title}}</h4>
                         <div class="text-dark" [innerHtml]="note.content | safeHtml"></div>
-                        <p class="text-secondary post-author">{{note.author}}</p>
+                        <p class="text-secondary post-author">{{note.username}}</p>
                     </a>
                 </div>
             </div>
@@ -22,11 +22,11 @@
             <h6 class="w-100">Pinned Notes</h6>
             <div *ngFor="let note of pinnedNotes">
                 <div class="bg-white border border-orange rounded note py-3 px-4 mb-2">
-                    <button class="btn" (click)="removeFromPinned(note.id || '')"><span class="fa fa-star-o"></span></button>
+                    <button class="btn" (click)="removeFromPinned(note)"><span class="fa fa-star"></span></button>
                     <a [routerLink]="['/notes', note.id]" class="text-decoration-none">
                         <h4 class="text-orange">{{note.title}}</h4>
                         <div class="text-dark" [innerHtml]="note.content | safeHtml"></div>
-                        <p class="text-secondary post-author">{{note.author}}</p>
+                        <p class="text-secondary post-author">{{note.username}}</p>
                     </a>
                 </div>
             </div>

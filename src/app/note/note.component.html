@@ -8,7 +8,7 @@
                 <ejs-richtexteditor id="content" name="content" [(ngModel)]="updatedNote.content" [readonly]="modifiable"
                                     [toolbarSettings]="tools" [maxLength]="maxLength">
                 </ejs-richtexteditor>
-                <p class="text-secondary post-author">{{updatedNote.author}}</p>
+                <p class="text-secondary post-author">{{updatedNote.username}}</p>
             </div>
             <div class="d-flex gap-1">
                 <button type="submit" class="btn btn-success" [disabled]="modifiable">Save</button>

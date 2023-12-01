@@ -1,7 +1,7 @@
 export interface Note {
     id: string | null;
     title: string | null;
-    author: string | null;
+    username: string | null;
     content: string | null;
     pinned: boolean | null;
 }
@@ -9,7 +9,7 @@ export interface Note {
 export const defaultNote: Note = {
     id: "0",
     title: "Title",
-    author: "gian",
+    username: "gian",
     content: "Content",
     pinned: false,
 };
