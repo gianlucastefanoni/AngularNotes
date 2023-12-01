@@ -3,6 +3,7 @@ export interface Note {
     title: string | null;
     author: string | null;
     content: string | null;
+    pinned: boolean | null;
 }
 
 export const defaultNote: Note = {
@@ -10,4 +11,5 @@ export const defaultNote: Note = {
     title: "Title",
     author: "gian",
     content: "Content",
+    pinned: false,
 };

@@ -20,6 +20,7 @@ export class NoteListComponent implements OnInit {
     newPath = "../assets/Group 1.svg";
     notes: Note[] = [];
     filteredNotes: Note[] = [];
+    pinnedNotes: Note[] = [];
     searchField = "";
     constructor(private dataService: DataService, private router: Router) {}
 
@@ -38,6 +39,7 @@ export class NoteListComponent implements OnInit {
             title: "Title",
             author: this.user.username || "",
             content: "Content",
+            pinned: false,
         });
         localStorage.setItem("notes", JSON.stringify(this.notes));
         this.router.navigateByUrl("/notes/" + id);
@@ -54,5 +56,19 @@ export class NoteListComponent implements OnInit {
                         .includes(this.searchField.toLowerCase())) &&
                 note.author === this.user.username
         );
+
+        this.pinnedNotes = this.filteredNotes.filter(
+            (note) => note.pinned === true
+        );
+    }
+
+    addToPinned(id = "") {
+        //find in filtered, add to pinned, remove from filtered
+        return id;
+    }
+
+    removeFromPinned(id = "") {
+        //find in pinned, add to filtered, remove from pinned
+        return id;
     }
 }

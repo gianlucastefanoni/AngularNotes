@@ -1,18 +1,36 @@
 <div class="container">
-    <div class="form-group has-search w-50 mx-auto mb-1">
-        <span class="fa fa-search form-control-feedback"></span>
-        <input id="searchField" name="searchField" [(ngModel)]="searchField" type="text"
-        class="form-control" placeholder="Search" (input)="onSearchChange()">
-        <p class="text-secondary">Total notes: {{filteredNotes.length}}</p>
-    </div>
-    <div *ngFor="let note of filteredNotes" class="w-50 mx-auto">
-        <a [routerLink]="['/notes', note.id]" class="text-decoration-none">
-            <div class="bg-white border border-orange rounded note p-4 mb-2">
-                <h4 class="text-orange">{{note.title}}</h4>
-                <div class="text-dark" [innerHtml]="note.content | safeHtml"></div>
-                <p class="text-secondary post-author">{{note.author}}</p>
+    <div class="row">
+        <div class="col-6 px-3">
+            <div class="form-group has-search mb-1">
+                <span class="fa fa-search form-control-feedback"></span>
+                <input id="searchField" name="searchField" [(ngModel)]="searchField" type="text"
+                       class="form-control" placeholder="Search" (input)="onSearchChange()">
+                <p class="text-secondary">Total notes: {{filteredNotes.length}}</p>
             </div>
-        </a>
+            <div *ngFor="let note of filteredNotes">
+                <div class="bg-white border border-orange rounded note py-3 px-4 mb-2">
+                    <button class="btn" (click)="addToPinned(note.id || '')"><span class="fa fa-star-o"></span></button>
+                    <a [routerLink]="['/notes', note.id]" class="text-decoration-none">
+                        <h4 class="text-orange">{{note.title}}</h4>
+                        <div class="text-dark" [innerHtml]="note.content | safeHtml"></div>
+                        <p class="text-secondary post-author">{{note.author}}</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 px-3">
+            <h6 class="w-100">Pinned Notes</h6>
+            <div *ngFor="let note of pinnedNotes">
+                <div class="bg-white border border-orange rounded note py-3 px-4 mb-2">
+                    <button class="btn" (click)="removeFromPinned(note.id || '')"><span class="fa fa-star-o"></span></button>
+                    <a [routerLink]="['/notes', note.id]" class="text-decoration-none">
+                        <h4 class="text-orange">{{note.title}}</h4>
+                        <div class="text-dark" [innerHtml]="note.content | safeHtml"></div>
+                        <p class="text-secondary post-author">{{note.author}}</p>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="btn-new" data-toggle="tooltip" title="Create a new note">
         <img [src]="newPath" width="70" (click)="createNewNote()" />
