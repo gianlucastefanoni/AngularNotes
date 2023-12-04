@@ -82,6 +82,7 @@ export class NoteListComponent implements OnInit {
         this.dataService.updatePinnedNoteById(note).subscribe(
             (response) => {
                 console.log(response);
+                this.ngOnInit();
             },
             (error) => {
                 console.log(error);
@@ -94,6 +95,7 @@ export class NoteListComponent implements OnInit {
         this.dataService.updatePinnedNoteById(note).subscribe(
             (response) => {
                 console.log(response);
+                this.ngOnInit();
             },
             (error) => {
                 console.log(error);
