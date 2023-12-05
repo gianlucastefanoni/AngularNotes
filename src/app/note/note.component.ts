@@ -9,6 +9,7 @@ import {
     ToolbarService,
 } from "@syncfusion/ej2-angular-richtexteditor";
 import { FormsModule, NgForm } from "@angular/forms";
+import { DataService } from "../data/data.service";
 
 @Component({
     selector: "pm-note",
@@ -19,7 +20,7 @@ import { FormsModule, NgForm } from "@angular/forms";
     providers: [ToolbarService, LinkService, HtmlEditorService],
 })
 export class NoteComponent implements OnInit {
-    notes: Note[] = [defaultNote, defaultNote];
+    notes: Note[] = [];
     updatedNote: Note = defaultNote;
     id = "0";
     modifiable = false;
@@ -48,40 +49,54 @@ export class NoteComponent implements OnInit {
         ],
     };
     public maxLength = 400;
-    constructor(private route: ActivatedRoute, private router: Router) {}
+    constructor(
+        private route: ActivatedRoute,
+        private router: Router,
+        private dataService: DataService
+    ) {}
 
     ngOnInit() {
-        const tempNotes = localStorage.getItem("notes");
-        if (tempNotes !== null) this.notes = JSON.parse(tempNotes);
         this.id = String(this.route.snapshot.paramMap.get("id"));
-        const tempNote = this.notes.find((note) => note.id === this.id);
-        if (tempNote !== undefined) this.updatedNote = tempNote;
-        this.modifiable =
-            JSON.parse(localStorage.getItem("logged") || "{username: '' }")
-                .username !== this.updatedNote.author;
+        this.dataService.getNoteById(this.id).subscribe(
+            (response) => {
+                this.updatedNote = JSON.parse(response)[0];
+                this.modifiable =
+                    JSON.parse(
+                        localStorage.getItem("logged") || "{username: '' }"
+                    ).username !== this.updatedNote.username;
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
     }
 
     updateNote() {
-        const noteToUpdate = this.notes.find((note) => note.id === this.id);
-
-        if (noteToUpdate) {
-            Object.assign(noteToUpdate, this.updatedNote);
-        } else {
-            console.error(`Note with id ${this.id} not found.`);
-        }
+        this.dataService.updateNoteById(this.updatedNote).subscribe(
+            (response) => {
+                console.log(response);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
     }
 
     deleteNote() {
-        console.log("delete");
-        const newNotes = this.notes.filter((note) => note.id !== this.id);
-        localStorage.setItem("notes", JSON.stringify(newNotes));
+        this.dataService.deleteNoteById(this.id).subscribe(
+            (response) => {
+                console.log(response);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
         this.router.navigateByUrl("/home");
     }
 
     onEnter(form: NgForm) {
         this.updatedNote.content = form.value.content;
         this.updateNote();
-        localStorage.setItem("notes", JSON.stringify(this.notes));
         this.router.navigateByUrl("/home");
     }
 }

@@ -20,27 +20,49 @@ export class NoteListComponent implements OnInit {
     newPath = "../assets/Group 1.svg";
     notes: Note[] = [];
     filteredNotes: Note[] = [];
+    pinnedNotes: Note[] = [];
     searchField = "";
     constructor(private dataService: DataService, private router: Router) {}
 
     ngOnInit() {
-        const tempNotes = localStorage.getItem("notes");
-        if (tempNotes !== null && tempNotes !== "null")
-            this.notes = JSON.parse(tempNotes);
-        else localStorage.setItem("notes", JSON.stringify(this.notes));
-        this.onSearchChange();
+        this.dataService.getNotesByUsername(this.user.username || "").subscribe(
+            (response) => {
+                this.notes = JSON.parse(response);
+                this.filteredNotes = this.notes;
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+        this.dataService
+            .getPinnedNotesByUsername(this.user.username || "")
+            .subscribe(
+                (response) => {
+                    this.pinnedNotes = JSON.parse(response);
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
     }
 
     createNewNote() {
         const id = this.dataService.generateId(8);
-        this.notes.push({
+        const newNote = {
             id: id,
             title: "Title",
-            author: this.user.username || "",
+            username: this.user.username || "",
             content: "Content",
-        });
-        localStorage.setItem("notes", JSON.stringify(this.notes));
-        this.router.navigateByUrl("/notes/" + id);
+            pinned: false,
+        };
+        this.dataService.createNewNote(newNote).subscribe(
+            (response) => {
+                this.router.navigateByUrl("/notes/" + id);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
     }
 
     onSearchChange() {
@@ -52,6 +74,32 @@ export class NoteListComponent implements OnInit {
                 note.content
                     ?.toLowerCase()
                     .includes(this.searchField.toLowerCase())
+        );
+    }
+
+    addToPinned(note: Note) {
+        note.pinned = true;
+        this.dataService.updatePinnedNoteById(note).subscribe(
+            (response) => {
+                console.log(response);
+                this.ngOnInit();
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+
+    removeFromPinned(note: Note) {
+        note.pinned = false;
+        this.dataService.updatePinnedNoteById(note).subscribe(
+            (response) => {
+                console.log(response);
+                this.ngOnInit();
+            },
+            (error) => {
+                console.log(error);
+            }
         );
     }
 }

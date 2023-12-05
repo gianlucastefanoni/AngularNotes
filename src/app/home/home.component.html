@@ -1,7 +1,9 @@
-<div class="d-flex gap-2">
-    <h1>Welcome</h1>
+<div class="d-flex">
+    <h1>Hi&nbsp;</h1>
     <h1 class="text-orange">{{welcomeMsg}}</h1>
+    <h1>!</h1>
 </div>
 <div *ngIf="logged">
+    <h5>Here you can browse all notes.</h5>
     <hw-note-list [user]="user"></hw-note-list>
 </div>

@@ -12,8 +12,7 @@ import { DataService } from "../data/data.service";
     templateUrl: "./register.component.html",
     styleUrl: "./register.component.css",
 })
-export class RegisterComponent implements OnInit {
-    allUsers: UserInterface[] = [];
+export class RegisterComponent {
     user: UserInterface = {
         email: null,
         username: null,
@@ -21,24 +20,23 @@ export class RegisterComponent implements OnInit {
         confirmPassword: null,
         gender: null,
     };
+    error = false;
 
     constructor(private router: Router, private dataService: DataService) {}
 
-    ngOnInit() {
-        this.allUsers = JSON.parse(localStorage.getItem("users") || "[]");
-    }
-    private notExists(): boolean {
-        const tempUser = this.allUsers.find(
-            (user) => user.username === this.user.username
-        );
-        return tempUser === null || tempUser === undefined;
-    }
-
     onEnter(form: NgForm) {
-        if (form.valid && this.notExists()) {
-            this.allUsers.push(this.user);
-            localStorage.setItem("users", JSON.stringify(this.allUsers));
-            this.router.navigateByUrl("/login");
+        if (form.valid) {
+            this.dataService.register(this.user).subscribe(
+                (response) => {
+                    this.router.navigateByUrl("/login");
+                },
+                (error) => {
+                    if (error.status) {
+                        console.log("Error Status Code:", error.status);
+                        this.error = true;
+                    }
+                }
+            );
         }
     }
 }
