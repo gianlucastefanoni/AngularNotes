@@ -9,7 +9,8 @@
             </div>
             <div *ngFor="let note of filteredNotes">
                 <div class="bg-white border border-orange rounded note py-3 px-4 mb-2">
-                    <button class="btn" (click)="addToPinned(note)"><span class="fa fa-star-o"></span></button>
+                    <button class="btn" (click)="addToPinned(note)" *ngIf="!note.pinned"><span class="fa fa-star-o"></span></button>
+                    <button class="btn" (click)="removeFromPinned(note)" *ngIf="note.pinned"><span class="fa fa-star"></span></button>
                     <a [routerLink]="['/notes', note.id]" class="text-decoration-none">
                         <h4 class="text-orange">{{note.title}}</h4>
                         <div class="text-dark" [innerHtml]="note.content | safeHtml"></div>
