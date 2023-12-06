@@ -12,7 +12,7 @@ import { DataService } from "../data/data.service";
     templateUrl: "./login.component.html",
     styleUrl: "./login.component.css",
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
     private _username = "";
     private _password = "";
     allUsers: UserInterface[] = [];
@@ -35,6 +35,12 @@ export class LoginComponent {
         this._password = value;
     }
 
+    ngOnInit() {
+        if (localStorage.getItem("logged") != null) {
+            this.router.navigateByUrl("/home");
+        }
+    }
+
     onEnter(form: NgForm) {
         const user: UserInterface = {
             email: "",
@@ -45,7 +51,7 @@ export class LoginComponent {
         };
         if (form.valid) {
             this.dataService.login(user).subscribe(
-                (response) => {
+                () => {
                     localStorage.setItem("logged", JSON.stringify(user));
                     this.error = false;
                     this.router.navigateByUrl("/home");

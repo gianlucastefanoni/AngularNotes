@@ -12,7 +12,7 @@ import { DataService } from "../data/data.service";
     templateUrl: "./register.component.html",
     styleUrl: "./register.component.css",
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
     user: UserInterface = {
         email: null,
         username: null,
@@ -23,6 +23,12 @@ export class RegisterComponent {
     error = false;
 
     constructor(private router: Router, private dataService: DataService) {}
+
+    ngOnInit() {
+        if (localStorage.getItem("logged") != null) {
+            this.router.navigateByUrl("/home");
+        }
+    }
 
     onEnter(form: NgForm) {
         if (form.valid) {
