@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { Note, defaultNote } from "../data/Note";
+import { Note } from "../data/Note";
 import { ActivatedRoute, Router } from "@angular/router";
 import {
     HtmlEditorService,
@@ -21,7 +21,7 @@ import { DataService } from "../data/data.service";
 })
 export class NoteComponent implements OnInit {
     notes: Note[] = [];
-    updatedNote: Note = defaultNote;
+    updatedNote = {} as Note;
     id = "0";
     modifiable = false;
     public tools: object = {
@@ -57,8 +57,8 @@ export class NoteComponent implements OnInit {
 
     ngOnInit() {
         this.id = String(this.route.snapshot.paramMap.get("id"));
-        this.dataService.getNoteById(this.id).subscribe(
-            (response) => {
+        this.dataService.getNoteById(this.id).subscribe({
+            next: (response) => {
                 this.updatedNote = JSON.parse(response)[0];
                 this.modifiable =
                     JSON.parse(
@@ -66,32 +66,32 @@ export class NoteComponent implements OnInit {
                     ).username !== this.updatedNote.username;
                 if (this.modifiable) this.router.navigateByUrl("/home");
             },
-            (error) => {
+            error: (error) => {
                 console.log(error);
-            }
-        );
+            },
+        });
     }
 
     updateNote() {
-        this.dataService.updateNoteById(this.updatedNote).subscribe(
-            (response) => {
+        this.dataService.updateNoteById(this.updatedNote).subscribe({
+            next: (response) => {
                 console.log(response);
             },
-            (error) => {
+            error: (error) => {
                 console.log(error);
-            }
-        );
+            },
+        });
     }
 
     deleteNote() {
-        this.dataService.deleteNoteById(this.id).subscribe(
-            (response) => {
+        this.dataService.deleteNoteById(this.id).subscribe({
+            next: (response) => {
                 console.log(response);
             },
-            (error) => {
+            error: (error) => {
                 console.log(error);
-            }
-        );
+            },
+        });
         this.router.navigateByUrl("/home");
     }
 

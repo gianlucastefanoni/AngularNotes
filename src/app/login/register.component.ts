@@ -32,17 +32,17 @@ export class RegisterComponent implements OnInit {
 
     onEnter(form: NgForm) {
         if (form.valid) {
-            this.dataService.register(this.user).subscribe(
-                (response) => {
+            this.dataService.register(this.user).subscribe({
+                next: () => {
                     this.router.navigateByUrl("/login");
                 },
-                (error) => {
+                error: (error) => {
                     if (error.status) {
                         console.log("Error Status Code:", error.status);
                         this.error = true;
                     }
-                }
-            );
+                },
+            });
         }
     }
 }

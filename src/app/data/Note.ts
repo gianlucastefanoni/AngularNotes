@@ -5,11 +5,3 @@ export interface Note {
     content: string | null;
     pinned: boolean | null;
 }
-
-export const defaultNote: Note = {
-    id: "0",
-    title: "Title",
-    username: "gian",
-    content: "Content",
-    pinned: false,
-};

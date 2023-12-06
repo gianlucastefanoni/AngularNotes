@@ -50,18 +50,18 @@ export class LoginComponent implements OnInit {
             gender: "",
         };
         if (form.valid) {
-            this.dataService.login(user).subscribe(
-                () => {
+            this.dataService.login(user).subscribe({
+                next: () => {
                     localStorage.setItem("logged", JSON.stringify(user));
                     this.error = false;
                     this.router.navigateByUrl("/home");
                 },
-                (error) => {
+                error: (error) => {
                     console.log(error);
                     this.errorMsg = error.error;
                     this.error = true;
-                }
-            );
+                },
+            });
         }
     }
 

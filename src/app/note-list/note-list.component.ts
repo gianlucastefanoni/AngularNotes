@@ -25,25 +25,27 @@ export class NoteListComponent implements OnInit {
     constructor(private dataService: DataService, private router: Router) {}
 
     ngOnInit() {
-        this.dataService.getNotesByUsername(this.user.username || "").subscribe(
-            (response) => {
-                this.notes = JSON.parse(response);
-                this.filteredNotes = this.notes;
-            },
-            (error) => {
-                console.log(error);
-            }
-        );
+        this.dataService
+            .getNotesByUsername(this.user.username || "")
+            .subscribe({
+                next: (response) => {
+                    this.notes = JSON.parse(response);
+                    this.filteredNotes = this.notes;
+                },
+                error: (error) => {
+                    console.log(error);
+                },
+            });
         this.dataService
             .getPinnedNotesByUsername(this.user.username || "")
-            .subscribe(
-                (response) => {
+            .subscribe({
+                next: (response) => {
                     this.pinnedNotes = JSON.parse(response);
                 },
-                (error) => {
+                error: (error) => {
                     console.log(error);
-                }
-            );
+                },
+            });
     }
 
     createNewNote() {
@@ -55,14 +57,14 @@ export class NoteListComponent implements OnInit {
             content: "Content",
             pinned: false,
         };
-        this.dataService.createNewNote(newNote).subscribe(
-            (response) => {
+        this.dataService.createNewNote(newNote).subscribe({
+            next: () => {
                 this.router.navigateByUrl("/notes/" + id);
             },
-            (error) => {
+            error: (error) => {
                 console.log(error);
-            }
-        );
+            },
+        });
     }
 
     onSearchChange() {
@@ -79,27 +81,27 @@ export class NoteListComponent implements OnInit {
 
     addToPinned(note: Note) {
         note.pinned = true;
-        this.dataService.updatePinnedNoteById(note).subscribe(
-            (response) => {
+        this.dataService.updatePinnedNoteById(note).subscribe({
+            next: (response) => {
                 console.log(response);
                 this.ngOnInit();
             },
-            (error) => {
+            error: (error) => {
                 console.log(error);
-            }
-        );
+            },
+        });
     }
 
     removeFromPinned(note: Note) {
         note.pinned = false;
-        this.dataService.updatePinnedNoteById(note).subscribe(
-            (response) => {
+        this.dataService.updatePinnedNoteById(note).subscribe({
+            next: (response) => {
                 console.log(response);
                 this.ngOnInit();
             },
-            (error) => {
+            error: (error) => {
                 console.log(error);
-            }
-        );
+            },
+        });
     }
 }
