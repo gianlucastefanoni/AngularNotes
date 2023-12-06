@@ -1,6 +1,6 @@
 <div class="d-flex">
-    <h1>Hi&nbsp;</h1>
-    <h1 class="text-orange">{{welcomeMsg}}</h1>
+    <h1>Hi</h1>
+    <h1 class="text-orange" *ngIf="welcomeMsg !== ''">&nbsp;{{welcomeMsg}}</h1>
     <h1>!</h1>
 </div>
 <div *ngIf="logged">

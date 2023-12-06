@@ -1,7 +1,7 @@
 <div class="container pt-2">
     <h1>Edit Note</h1>
-    <form #form="ngForm" (ngSubmit)="onEnter(form)">
-        <div class="w-50 h-100 mx-auto">
+    <form #form="ngForm" (ngSubmit)="onEnter(form)" class="row">
+        <div class="col-md-6 h-100 mx-auto">
             <div class="bg-white border border-orange rounded p-4 mb-2">
                 <input id="title" name="title" class="form-control text-orange fs-4 border-0 mb-2" type="text"
                        [(ngModel)]="updatedNote.title" [disabled]="modifiable" />
