@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
     constructor(private router: Router, private dataService: DataService) {}
 
     ngOnInit() {
-        if (localStorage.getItem("logged") != null) {
+        if (localStorage.getItem("logged") !== "") {
             this.router.navigateByUrl("/home");
         }
     }

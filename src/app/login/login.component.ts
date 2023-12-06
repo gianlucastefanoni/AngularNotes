@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
-        if (localStorage.getItem("logged") != null) {
+        if (localStorage.getItem("logged") !== "") {
             this.router.navigateByUrl("/home");
         }
     }

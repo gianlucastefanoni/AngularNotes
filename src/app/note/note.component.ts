@@ -64,6 +64,7 @@ export class NoteComponent implements OnInit {
                     JSON.parse(
                         localStorage.getItem("logged") || "{username: '' }"
                     ).username !== this.updatedNote.username;
+                if (this.modifiable) this.router.navigateByUrl("/home");
             },
             (error) => {
                 console.log(error);
